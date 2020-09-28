@@ -60,8 +60,7 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
 
     @ReactMethod
     fun launchDebugMode(promise: Promise) {
-        sdk!!.launchDebugMode(currentActivity!!.applicationContext)
-        promise.resolve(true)
+        promise.resolve(sdk!!.launchDebugMode(currentActivity!!.applicationContext))
     }
     
 }
