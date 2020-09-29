@@ -54,6 +54,11 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
     }
 
     @ReactMethod
+    fun getExperiments(promise: Promise) {
+        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.experiments))
+    }
+
+    @ReactMethod
     fun getLastOperationDurationMillis(promise: Promise) {
         promise.resolve(sdk!!.lastOperationDurationMillis.toDouble())
     }

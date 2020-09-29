@@ -17,7 +17,10 @@ const connectToAppboosterSDK = async () => {
   console.log('connected to AppboosterSdk: ', connected);
 
   const experiments = await AppboosterSdk.fetch();
-  console.log('experiments: ', experiments);
+  console.log('experiments init fetch: ', experiments);
+
+  const cached_experiments = await AppboosterSdk.getExperiments();
+  console.log('experiments cached value: ', cached_experiments);
 
   const duration = await AppboosterSdk.getLastOperationDurationMillis();
   console.log('duration: ', duration);

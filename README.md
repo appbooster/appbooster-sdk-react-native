@@ -109,7 +109,7 @@ const connected = await AppboosterSdk.connect({
 ### How to fetch known test values that associated with your device?
 
 ```js
-const experiments = await AppboosterSdk.fetch(); // list of experiments (initial fetch to server)
+const experiments = await AppboosterSdk.fetch(); // object with experiments (initial fetch to server)
 ```
 
 ### How to get the value for a specific test?
@@ -123,7 +123,7 @@ In case of problems with no internet connection or another, the values obtained 
 ### How to get user tests for analytics?
 
 ```js
-const experiments = await AppboosterSdk.getExperiments(); // list of experiments (cached values after initial fetch to server)
+const experiments = await AppboosterSdk.getExperiments(); // object with experiments (cached values after initial fetch to server)
 
 // i.e. set Amplitude user properties
 const amplitude = new RNAmplitude('Your Amplitude key');
