@@ -26,9 +26,9 @@ npm install --save appbooster-sdk-react-native
 
 ##### use_frameworks! usage
 
-If your project use `use_frameworks!` (we can use it from RN >= 0.61, `Podfile` exist in your project and contains uncommented `use_frameworks!` line) see [Pods usage section](#pods-usage)
+If your project use `use_frameworks!` (we can use it from **RN >= 0.61**, `Podfile` exist in your project and contains uncommented `use_frameworks!` line) see [Pods usage section](#pods-usage)
 
-If your project doesn't use `use_frameworks!` make sure that you have Swift integration in your project. If you have no Swift integration in your project you need to integrate Swift in your porject:
+If your project doesn't use `use_frameworks!` (we can't use it by default for **RN < 0.61**) make sure that you have Swift integration in your project. If you have no Swift integration in your project you need to integrate Swift in your porject:
 
 1. In XCode, in the project navigator, right click your `[your project's name]` folder, choose ➜ `Add Files to [your project's name]`
 
@@ -50,13 +50,13 @@ If your project doesn't use `use_frameworks!` make sure that you have Swift inte
 
 ##### Pods usage
 
-**if you are using Pods** (used by default since the RN >= 0.60, `Podfile` exist in your project):
+**if you are using Pods** (used by default since the **RN >= 0.60**, `Podfile` exist in your project):
 
 ```bash
 cd ios && pod install
 ```
 
-**if you are NOT using Pods**:  
+**if you are NOT using Pods** (Pods are not used by default for **RN < 0.60**):  
 see docs about linking library [manually](https://reactnative.dev/docs/linking-libraries-ios#manual-linking)
 
 **NOTE**:  
@@ -65,9 +65,9 @@ More info about **autolinking** mechanism in iOS you can see [here](https://gith
 
 #### Android
 
-if you are using [autolonking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#platform-android) (used by default since the RN >= 0.60) you **no need to do anything**!
+if you are using [autolonking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#platform-android) (used by default since the **RN >= 0.60**) you **no need to do anything**!
 
-if you are **NOT** using autolinking follow next steps:
+if you are **NOT** using autolinking (we can't use it by default in **RN < 0.60** ) follow next steps:
 
 1. Open up `android/app/src/main/java/[...]/MainApplication.java`
 
