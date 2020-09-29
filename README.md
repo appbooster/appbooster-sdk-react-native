@@ -28,7 +28,7 @@ npm install --save appbooster-sdk-react-native
 
 If your project use `use_frameworks!` (we can use it from RN >= 0.61) see [Pods usage section](#pods-usage)
 
-If your project doesn't use `use_frameworks!` you need to integrate Swift in your porject:
+If your project doesn't use `use_frameworks!` make sure that you have Swift integration in your project. If you have no Swift integration in your project you need to integrate Swift in your porject:
 
 1. In XCode, in the project navigator, right click your `[your project's name]` folder, choose ➜ `Add Files to [your project's name]`
 
