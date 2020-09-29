@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
   
 
   s.dependency "React"
-  s.dependency "AppboosterSDK"
+  s.dependency "AppboosterSDK", "0.1.10"
 end
