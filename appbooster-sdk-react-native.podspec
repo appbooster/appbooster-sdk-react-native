@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
   
   s.source_files = "ios/**/*.{h,m,mm,swift}"
   
+  s.swift_version = "5.0"
 
   s.dependency "React"
   s.dependency "AppboosterSDK", "0.1.10"

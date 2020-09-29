@@ -4,6 +4,9 @@ React Native wrapper for Appbooster SDK ([ios](https://github.com/appbooster/app
 
 ## Installation
 
+Note that RN SDK doesn't support **RN < 0.62**.  
+If you want to use RN SDK in your project, please, update your project to **RN >= 0.62**
+
 ### Common steps
 
 #### install library
@@ -24,11 +27,15 @@ npm install --save appbooster-sdk-react-native
 
 #### iOS
 
-##### use_frameworks! usage
+##### use_frameworks!
 
-If your project use `use_frameworks!` (we can use it from **RN >= 0.61**, `Podfile` exist in your project and contains uncommented `use_frameworks!` line) see [Pods usage section](#pods-usage)
+If you use `use_frameworks!` go to [Pods installation section](#pods-installation)
 
-If your project doesn't use `use_frameworks!` (we can't use it by default for **RN < 0.61**) make sure that you have Swift integration in your project. If you have no Swift integration in your project you need to integrate Swift in your porject:
+If you don't use `use_frameworks!` go to [Swift integration section](#swift-integration)
+
+##### Swift integration
+
+If you have no Swift integration in your project follow next steps:
 
 1. In XCode, in the project navigator, right click your `[your project's name]` folder, choose ➜ `Add Files to [your project's name]`
 
@@ -46,44 +53,17 @@ If your project doesn't use `use_frameworks!` (we can't use it by default for **
 
 ![Create Swift File](https://i.imgur.com/f2zA0n9.png)
 
-5. See [Pods usage section](#pods-usage)
+5. Go to [Pods installation section](#pods-installation)
 
-##### Pods usage
-
-**if you are using Pods** (used by default since the **RN >= 0.60**, `Podfile` exist in your project):
+##### Pods installation
 
 ```bash
 cd ios && pod install
 ```
 
-**if you are NOT using Pods** (Pods are not used by default for **RN < 0.60**):  
-see docs about linking library [manually](https://reactnative.dev/docs/linking-libraries-ios#manual-linking)
-
-**NOTE**:  
-More info about linking iOS library you can see [here](https://reactnative.dev/docs/linking-libraries-ios)  
-More info about **autolinking** mechanism in iOS you can see [here](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#platform-ios)
-
 #### Android
 
-if you are using [autolonking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#platform-android) (used by default since the **RN >= 0.60**) you **no need to do anything**!
-
-if you are **NOT** using autolinking (we can't use it by default in **RN < 0.60** ) follow next steps:
-
-1. Open up `android/app/src/main/java/[...]/MainApplication.java`
-
-- Add `import com.appboostersdkreactnative.AppboosterSdkReactNativePackage;` to the imports at the top of the file
-- Add `new AppboosterSdkReactNativePackage()` to the list returned by the `getPackages()` method
-
-2. Append the following lines to `android/settings.gradle`:
-
-   ```android
-   include ':appbooster-sdk-react-native'
-   project(':appbooster-sdk-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/appbooster-sdk-react-native/android')
-   ```
-
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`: `implementation project(':appbooster-sdk-react-native')`
-
-**NOTE**: if you want to link library manually in project with autolinking support see info [here](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md#how-can-i-disable-autolinking-for-unsupported-library)
+You no need to do anything!
 
 ## Usage
 
