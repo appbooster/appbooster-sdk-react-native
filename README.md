@@ -26,7 +26,7 @@ npm install --save appbooster-sdk-react-native
 
 ##### use_frameworks! usage
 
-If your project use `use_frameworks!` (we can use it from RN >= 0.61) see [Pods usage section](#pods-usage)
+If your project use `use_frameworks!` (we can use it from RN >= 0.61, `Podfile` exist in your project and contains uncommented `use_frameworks!` line) see [Pods usage section](#pods-usage)
 
 If your project doesn't use `use_frameworks!` make sure that you have Swift integration in your project. If you have no Swift integration in your project you need to integrate Swift in your porject:
 
@@ -50,7 +50,7 @@ If your project doesn't use `use_frameworks!` make sure that you have Swift inte
 
 ##### Pods usage
 
-**if you are using Pods** (used by default since the RN >= 0.60):
+**if you are using Pods** (used by default since the RN >= 0.60, `Podfile` exist in your project):
 
 ```bash
 cd ios && pod install
