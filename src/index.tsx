@@ -17,7 +17,7 @@ type SDKSettings = {
 
 type AppboosterSdkReactNativeType = {
   connect(sdkSettings: SDKSettings): Promise<boolean>;
-  fetch(): Promise<Experiments>;
+  fetch(): Promise<boolean>;
   getExperiments(): Promise<Experiments>;
   getLastOperationDurationMillis(): Promise<number>;
   launchDebugMode(): Promise<boolean>;
@@ -42,7 +42,7 @@ class AppboosterSdk {
     });
   };
 
-  fetch = async (): Promise<Experiments> => {
+  fetch = async (): Promise<boolean> => {
     return await AppboosterSdkReactNative.fetch();
   };
 

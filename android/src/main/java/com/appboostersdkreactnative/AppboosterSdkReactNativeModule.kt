@@ -42,12 +42,12 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
         sdk?.fetch(
                 onSuccessListener = object: AppboosterSdk.OnSuccessListener{
                     override fun onSuccess() {
-                        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments(withPrefix = false)))
+                        promise.resolve(true)
                     }
                 },
                 onErrorListener = object: AppboosterSdk.OnErrorListener{
                     override fun onError(th: Throwable) {
-                        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments(withPrefix = false)))
+                        promise.resolve(false)
                     }
                 }
         )

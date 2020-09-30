@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 import AppboosterSdk from 'appbooster-sdk-react-native';
 
 const connectToAppboosterSDK = async () => {
@@ -16,15 +16,20 @@ const connectToAppboosterSDK = async () => {
   });
   console.log('connected to AppboosterSdk: ', connected);
 
-  const experiments = await AppboosterSdk.fetch();
-  console.log('experiments init fetch: ', experiments);
+  const fetched = await AppboosterSdk.fetch();
+  console.log('fetch experiments: ', fetched);
 
-  const cached_experiments = await AppboosterSdk.getExperiments();
-  console.log('experiments cached value: ', cached_experiments);
+  const experiments = await AppboosterSdk.getExperiments();
+  console.log('experiments : ', experiments);
+
+  const experiment = experiments['TEST_1_KEY'];
+  console.log('experiment: ', experiment);
 
   const duration = await AppboosterSdk.getLastOperationDurationMillis();
   console.log('duration: ', duration);
+};
 
+const activateDebug = async () => {
   const isDebugModeLaunched = await AppboosterSdk.launchDebugMode();
   console.log('isDebugModeLaunched: ', isDebugModeLaunched);
 };
@@ -37,6 +42,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>AppboosterSdk test</Text>
+      <Button title="activate Debug Mode" onPress={activateDebug} />
     </View>
   );
 }

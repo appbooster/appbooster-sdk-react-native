@@ -37,7 +37,7 @@ class AppboosterSdkReactNative: NSObject {
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock) -> Void {
         sdk!.fetch(completion: { error in
-            resolve(self.sdk!.experiments)
+            resolve(error == nil)
         })
     }
 
