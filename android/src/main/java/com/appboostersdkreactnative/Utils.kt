@@ -21,10 +21,11 @@ internal object Utils {
         return fromJSONObjectToMap(defaults)
     }
 
-    fun prepareExperimentsForJS(experiments: List<Experiment>): WritableMap {
+    fun prepareExperimentsForJS(experiments: Map<String, String>): WritableMap {
         val preparedExperiments = Arguments.createMap()
-        experiments.forEach {
-            preparedExperiments.putString(it.key, it.value);
+
+        for((key, value) in experiments){
+            preparedExperiments.putString(key, value);
         }
 
         return preparedExperiments

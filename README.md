@@ -4,7 +4,7 @@ React Native wrapper for Appbooster SDK ([ios](https://github.com/appbooster/app
 
 ## Installation
 
-Note that RN SDK doesn't support **RN < 0.62**.  
+Note that RN SDK currently doesn't support projects with **RN < 0.62**.  
 If you want to use RN SDK in your project, please, update your project to **RN >= 0.62**
 
 ### Common steps
@@ -111,7 +111,7 @@ Before debug make sure that debug-mode for your App is turned-on on [settings pa
 ```js
 const connected = await AppboosterSdk.connect({
   //...
-  isInDevMode: true, // false by default, to print all debugging info in the console (you can see logs in XCode or Android Studio)
+  showLogs: true, // false by default, to print all debugging info in the console (you can see logs in XCode or Android Studio)
   //...
 });
 

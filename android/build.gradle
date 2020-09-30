@@ -127,5 +127,5 @@ dependencies {
   // noinspection GradleDynamicVersion
   api 'com.facebook.react:react-native:+'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation "com.appbooster.appboostersdk:appboostersdk:0.1.0"
+  implementation "com.appbooster.appboostersdk:appboostersdk:0.2.0"
 }

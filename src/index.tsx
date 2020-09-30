@@ -12,7 +12,7 @@ type SDKSettings = {
   deviceId: string;
   usingShake: boolean;
   defaults: Experiments;
-  isInDevMode: boolean;
+  showLogs: boolean;
 };
 
 type AppboosterSdkReactNativeType = {
@@ -30,7 +30,7 @@ class AppboosterSdk {
     deviceId = '',
     usingShake = false,
     defaults = {},
-    isInDevMode = false,
+    showLogs = false,
   }: SDKSettings): Promise<boolean> => {
     return await AppboosterSdkReactNative.connect({
       appId,
@@ -38,7 +38,7 @@ class AppboosterSdk {
       deviceId,
       usingShake,
       defaults,
-      isInDevMode,
+      showLogs,
     });
   };
 

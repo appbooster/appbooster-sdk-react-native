@@ -20,7 +20,7 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
         val deviceId = preparedSettings.getString("deviceId") ?: ""
         val usingShake = preparedSettings.getBoolean("usingShake")
         val defaults = Utils.getDefaultExperiments(preparedSettings.getJSONObject("defaults"))
-        val isInDevMode = preparedSettings.getBoolean("isInDevMode")
+        val showLogs = preparedSettings.getBoolean("showLogs")
 
         if (currentActivity != null) {
             currentActivity!!.runOnUiThread(Runnable {
@@ -30,7 +30,7 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
                         .deviceId(deviceId)
                         .usingShake(usingShake)
                         .defaults(defaults)
-                        .isInDevMode(isInDevMode)
+                        .showLogs(showLogs)
                         .build()
                 promise.resolve(true)
             })
@@ -42,12 +42,12 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
         sdk?.fetch(
                 onSuccessListener = object: AppboosterSdk.OnSuccessListener{
                     override fun onSuccess() {
-                        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.experiments))
+                        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments(withPrefix = false)))
                     }
                 },
                 onErrorListener = object: AppboosterSdk.OnErrorListener{
                     override fun onError(th: Throwable) {
-                        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.experiments))
+                        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments(withPrefix = false)))
                     }
                 }
         )
@@ -55,7 +55,7 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
 
     @ReactMethod
     fun getExperiments(promise: Promise) {
-        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.experiments))
+        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments(withPrefix = false)))
     }
 
     @ReactMethod

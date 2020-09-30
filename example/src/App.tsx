@@ -12,7 +12,7 @@ const connectToAppboosterSDK = async () => {
       ['TEST_1_KEY']: 'TEST_1_DEFAULT_VALUE',
       ['TEST_2_KEY']: 'TEST_2_DEFAULT_VALUE',
     },
-    isInDevMode: false,
+    showLogs: false,
   });
   console.log('connected to AppboosterSdk: ', connected);
 
