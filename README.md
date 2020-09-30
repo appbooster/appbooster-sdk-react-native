@@ -27,12 +27,6 @@ npm install --save appbooster-sdk-react-native
 
 #### iOS
 
-##### use_frameworks!
-
-If you use `use_frameworks!` go to [Pods installation section](#pods-installation)
-
-If you don't use `use_frameworks!` go to [Swift integration section](#swift-integration)
-
 ##### Swift integration
 
 If you have no Swift integration in your project follow next steps:
@@ -53,12 +47,10 @@ If you have no Swift integration in your project follow next steps:
 
 ![Create Swift File](https://i.imgur.com/f2zA0n9.png)
 
-5. Go to [Pods installation section](#pods-installation)
-
 ##### Pods installation
 
 ```bash
-cd ios && pod install
+cd ios && pod install && cd ..
 ```
 
 #### Android
