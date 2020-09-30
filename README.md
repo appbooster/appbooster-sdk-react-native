@@ -87,21 +87,25 @@ const fetched = await AppboosterSdk.fetch(); // boolean
 ### How to get the value for a specific test?
 
 ```js
-const experiments = await AppboosterSdk.getExperiments(); // object with experiments
+const experiments = await AppboosterSdk.getExperiments(/*addAppboosterPrefix*/); // object with experiments
 const value = experiments['TEST_1_KEY']; // string
 ```
+
+**NOTE:** You can find info about `addAppboosterPrefix` in [analytics usage section](#how-to-get-user-tests-for-analytics)
 
 In case of problems with no internet connection or another, the values obtained in the previous session will be used, or if they are missing, the default values specified during initialization will be used.
 
 ### How to get user tests for analytics?
 
 ```js
-const experiments = await AppboosterSdk.getExperiments(); // object with experiments
+const experiments = await AppboosterSdk.getExperiments(/*addAppboosterPrefix*/); // object with experiments
 
 // i.e. set Amplitude user properties
 const amplitude = new RNAmplitude('Your Amplitude key');
 amplitude.setUserProperties(experiments);
 ```
+
+where `addAppboosterPrefix` is an optional boolean parameter (`true` by default) that used to add [Appbooster] prefix to experiments' keys.
 
 ### How to debug?
 

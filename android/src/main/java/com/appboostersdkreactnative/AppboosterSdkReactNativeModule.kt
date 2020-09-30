@@ -54,8 +54,8 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
     }
 
     @ReactMethod
-    fun getExperiments(promise: Promise) {
-        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments(withPrefix = false)))
+    fun getExperiments(addAppboosterPrefix: Boolean, promise: Promise) {
+        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments(withPrefix = addAppboosterPrefix)))
     }
 
     @ReactMethod

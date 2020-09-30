@@ -41,11 +41,12 @@ class AppboosterSdkReactNative: NSObject {
         })
     }
 
-    @objc(getExperiments:withRejecter:)
+    @objc(getExperiments:withResolver:withRejecter:)
     func getExperiments(
+        addAppboosterPrefix: Bool,
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock) -> Void {
-        resolve(sdk!.experiments)
+        resolve(sdk!.experiments(addAppboosterPrefix: addAppboosterPrefix))
     }
     
     @objc(getLastOperationDurationMillis:withRejecter:)

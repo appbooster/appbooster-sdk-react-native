@@ -32,7 +32,8 @@
     "clear-example": "cd example && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && rm -rf node_modules/ && yarn cache clean && cd ios && rm -rf Pods && rm -rf build && cd .. && cd android && rm -rf build && cd .. && cd ..",
     "clear-android-cache": "cd example/android && bash gradlew clean && bash gradlew cleanBuildCache && cd ..",
     "clear": "yarn clear-root && yarn clear-example",
-    "reset": "yarn clear-root && yarn clear-example && yarn bootstrap && yarn clear-android-cache"
+    "reset": "yarn clear-root && yarn clear-example && yarn bootstrap && yarn clear-android-cache",
+    "pods-clean": "cd example && cd ios && pod cache clean --all && cd .. && cd .."
   },
   "keywords": [
     "react-native",
