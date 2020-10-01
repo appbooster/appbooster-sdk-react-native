@@ -5,7 +5,7 @@ React Native wrapper for Appbooster SDK ([ios](https://github.com/appbooster/app
 ## Installation
 
 Note that RN SDK currently doesn't support projects with **RN < 0.62**.  
-If you want to use RN SDK in your project, please, update your project to **RN >= 0.62**
+If you want to use RN SDK in your project, please, upgrade your project to **RN >= 0.62**
 
 ### Common steps
 
@@ -27,7 +27,7 @@ npm install --save appbooster-sdk-react-native
 
 #### iOS
 
-##### 1. Swift's support step
+##### 1. Swift support step
 
 <details>
 <summary><b>If you use <code>use_frameworks!</code></b></summary>
@@ -43,7 +43,7 @@ pre_install do |installer|
   installer.pod_targets.each do |pod|
     if pod.name.eql?('appbooster-sdk-react-native')
       def pod.build_type; # Uncomment one line depending on your CocoaPods version
-        Pod::BuildType.static_library # Pods version >= 1.9 (uncomment by default)
+        Pod::BuildType.static_library # Pods version >= 1.9 (uncommented by default)
         # Pod::Target::BuildType.static_library # Pods version < 1.9
       end
     end
@@ -151,8 +151,8 @@ try {
 Before debug make sure that debug-mode for your App is turned-on on [settings page](https://platform.appbooster.com/ab/settings)
 
 ![](https://imgproxy.appbooster.com/9ACImnEbmsO822dynjTjcC_B8aXzbbpPQsOgop2PlBs//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tLzk0N2M5NzdmLTAwY2EtNDA1Yi04OGQ4LTAzOTM4ZjY4OTAzYi5wbmc.png)
-![](https://imgproxy.appbooster.com/DTJe8gCCUt-FBdGoEvwIp7TFYQ1JfwCZZPiFrR4tkic//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tLzNkM2IyMDkyLWNiOGYtNDhhNi05MjgwLTMxMWRhNDZmZmJiMy5wbmc.png =229x494)
-![](https://imgproxy.appbooster.com/vK0c6Ia7iBueCiczg27J7AVhnEIW0dDULdgHlWPg0Po//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tL2Y3NTZkODdmLTc4YTAtNGE1ZS04YjhjLTAwNTBhMWVjNThkZC5wbmc.png =241x494)
+<img src="https://imgproxy.appbooster.com/DTJe8gCCUt-FBdGoEvwIp7TFYQ1JfwCZZPiFrR4tkic//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tLzNkM2IyMDkyLWNiOGYtNDhhNi05MjgwLTMxMWRhNDZmZmJiMy5wbmc.png" width="229" height="494" />
+<img src="https://imgproxy.appbooster.com/vK0c6Ia7iBueCiczg27J7AVhnEIW0dDULdgHlWPg0Po//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tL2Y3NTZkODdmLTc4YTAtNGE1ZS04YjhjLTAwNTBhMWVjNThkZC5wbmc.png" width="241" height="494" />
 
 ```js
 const connected = await AppboosterSdk.connect({
