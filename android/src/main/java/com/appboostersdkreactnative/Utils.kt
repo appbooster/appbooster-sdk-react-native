@@ -1,7 +1,5 @@
 package com.appboostersdkreactnative
 
-import com.appbooster.appboostersdk.Experiment
-
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.bridge.ReadableType

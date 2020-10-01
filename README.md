@@ -87,11 +87,12 @@ const fetched = await AppboosterSdk.fetch(); // boolean
 ### How to get the value for a specific test?
 
 ```js
+// This method add prefix `[Appbooster] ` to all experiment names by default
+// It helps you group all user properties in analytics
+// If you need clear names without prefix use `await AppboosterSdk.getExperiments(false)` (i.e. for your logs)
 const experiments = await AppboosterSdk.getExperiments(/*optional boolean parameter, true by default*/); // object with experiments
 const value = experiments['TEST_1_KEY']; // string
 ```
-
-**NOTE:** You can find info about `getExperiments`-method's optional boolean parameter in [analytics usage section](#how-to-get-user-tests-for-analytics)
 
 In case of problems with no internet connection or another, the values obtained in the previous session will be used, or if they are missing, the default values specified during initialization will be used.
 
@@ -120,11 +121,13 @@ try {
 Before debug make sure that debug-mode for your App is turned-on on [settings page](https://platform.appbooster.com/ab/settings)
 
 ![](https://imgproxy.appbooster.com/9ACImnEbmsO822dynjTjcC_B8aXzbbpPQsOgop2PlBs//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tLzk0N2M5NzdmLTAwY2EtNDA1Yi04OGQ4LTAzOTM4ZjY4OTAzYi5wbmc.png)
+![](https://imgproxy.appbooster.com/DTJe8gCCUt-FBdGoEvwIp7TFYQ1JfwCZZPiFrR4tkic//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tLzNkM2IyMDkyLWNiOGYtNDhhNi05MjgwLTMxMWRhNDZmZmJiMy5wbmc.png =229x494)
+![](https://imgproxy.appbooster.com/vK0c6Ia7iBueCiczg27J7AVhnEIW0dDULdgHlWPg0Po//aHR0cHM6Ly9hcHBib29zdGVyLWNsb3VkLnMzLmV1LWNlbnRyYWwtMS5hbWF6b25hd3MuY29tL2Y3NTZkODdmLTc4YTAtNGE1ZS04YjhjLTAwNTBhMWVjNThkZC5wbmc.png =241x494)
 
 ```js
 const connected = await AppboosterSdk.connect({
   //...
-  showLogs: true, // false by default, to print all debugging info in the console (you can see logs in XCode or Android Studio)
+  showLogs: true, // false by default, to print all debugging info in the console (note that currently you can see logs in XCode or Android Studio but not in JS console)
   //...
 });
 
