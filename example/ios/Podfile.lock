@@ -1,5 +1,5 @@
 PODS:
-  - appbooster-sdk-react-native (0.1.0):
+  - appbooster-sdk-react-native (0.2.0):
     - AppboosterSDK (= 0.2.0)
     - React
   - AppboosterSDK (0.2.0)
@@ -407,7 +407,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  appbooster-sdk-react-native: d2cd73f2ffd51d8d9e30d533aa6de38851123970
+  appbooster-sdk-react-native: 9e796d860587cad317a125ce9237ab2a17326b9a
   AppboosterSDK: 9129a8050671d7d4d278a29c3776f4c76eac6216
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
