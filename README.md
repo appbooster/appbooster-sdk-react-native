@@ -27,9 +27,37 @@ npm install --save appbooster-sdk-react-native
 
 #### iOS
 
-##### Swift integration
+##### 1. Swift's support step
 
-If you have no Swift integration in your project follow next steps:
+<details>
+<summary><b>If you use <code>use_frameworks!</code></b></summary>
+<br>
+Add next lines of code in <code>Podfile</code>:
+
+```rb
+use_frameworks! # You already use it in your project!
+
+# add next lines of code:
+
+pre_install do |installer|
+  installer.pod_targets.each do |pod|
+    if pod.name.eql?('appbooster-sdk-react-native')
+      def pod.build_type; # Uncomment one line depending on your CocoaPods version
+        Pod::BuildType.static_library # Pods version >= 1.9 (uncomment by default)
+        # Pod::Target::BuildType.static_library # Pods version < 1.9
+      end
+    end
+  end
+end
+```
+
+</details>
+
+<details>
+<summary><b>If you don't use <code>use_frameworks!</code></b> (default for RN projects)</summary>
+<br>
+If you <b>have no Swift integration</b> in your project follow next steps:
+<br><br>
 
 1. In XCode, in the project navigator, right click your `[your project's name]` folder, choose ➜ `Add Files to [your project's name]`
 
@@ -47,7 +75,9 @@ If you have no Swift integration in your project follow next steps:
 
 ![Create Swift File](https://i.imgur.com/f2zA0n9.png)
 
-##### Pods installation
+</details>
+
+##### 2. Pods installation step
 
 ```bash
 cd ios && pod install && cd ..
