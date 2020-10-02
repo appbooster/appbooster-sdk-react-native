@@ -2,6 +2,11 @@
 
 @interface RCT_EXTERN_MODULE(AppboosterSdkReactNative, NSObject)
 
++ (BOOL)requiresMainQueueSetup
+{
+  return NO;
+}
+
 RCT_EXTERN_METHOD(connect:(NSDictionary *)sdkSettings
                  withResolver:(RCTPromiseResolveBlock)resolve
                  withRejecter:(RCTPromiseRejectBlock)reject)
