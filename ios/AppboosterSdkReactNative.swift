@@ -46,7 +46,12 @@ class AppboosterSdkReactNative: NSObject {
         addAppboosterPrefix: Bool,
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock) -> Void {
-        resolve(sdk!.experiments(addAppboosterPrefix: addAppboosterPrefix))
+        var experiments: [String: String] = [:]
+        for (key, _) in sdk!.experiments(addAppboosterPrefix: addAppboosterPrefix) {
+            let experimentValue: String? = sdk[key]
+            experiments.updateValue(experimentValue ?? "", forKey: key)
+        }
+        resolve(experiments)
     }
     
     @objc(getLastOperationDurationMillis:withRejecter:)

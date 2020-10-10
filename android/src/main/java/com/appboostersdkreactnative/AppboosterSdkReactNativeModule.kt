@@ -55,7 +55,12 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
 
     @ReactMethod
     fun getExperiments(addAppboosterPrefix: Boolean, promise: Promise) {
-        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments(withPrefix = addAppboosterPrefix)))
+        val experiments = mutableMapOf<String, String>()
+        for((key, _) in sdk!!.getExperiments(withPrefix = addAppboosterPrefix)) {
+            val experimentValue = sdk!![key] as String
+            experiments[key] = experimentValue
+        }
+        promise.resolve(Utils.prepareExperimentsForJS(experiments))
     }
 
     @ReactMethod
