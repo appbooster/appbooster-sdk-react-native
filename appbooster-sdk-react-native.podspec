@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
   s.swift_version = "5.0"
 
   s.dependency "React"
-  s.dependency "AppboosterSDK", "0.2.0"
+  s.dependency "AppboosterSDK", "0.2.3"
 end

@@ -21,17 +21,24 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
         val usingShake = preparedSettings.getBoolean("usingShake")
         val defaults = Utils.getDefaultExperiments(preparedSettings.getJSONObject("defaults"))
         val showLogs = preparedSettings.getBoolean("showLogs")
+        val appsFlyerId = if (preparedSettings.has("appsFlyerId ")) preparedSettings.getString("appsFlyerId") else null
 
         if (currentActivity != null) {
             currentActivity!!.runOnUiThread(Runnable {
-                sdk = AppboosterSdk.Builder(currentActivity!!.applicationContext)
+                val sdkBuilder = AppboosterSdk.Builder(currentActivity!!.applicationContext)
                         .appId(appId)
                         .sdkToken(sdkToken)
                         .deviceId(deviceId)
                         .usingShake(usingShake)
                         .defaults(defaults)
                         .showLogs(showLogs)
-                        .build()
+
+                appsFlyerId?.let {
+                    sdkBuilder.appsFlyerId(it)
+                }
+
+                sdk = sdkBuilder.build()
+
                 promise.resolve(true)
             })
         } else { promise.resolve(false) }
@@ -54,13 +61,13 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
     }
 
     @ReactMethod
-    fun getExperiments(addAppboosterPrefix: Boolean, promise: Promise) {
-        val experiments = mutableMapOf<String, String>()
-        for((key, _) in sdk!!.getExperiments(withPrefix = addAppboosterPrefix)) {
-            val experimentValue = sdk!![key] as String
-            experiments[key] = experimentValue
-        }
-        promise.resolve(Utils.prepareExperimentsForJS(experiments))
+    fun getExperiments(promise: Promise) {
+        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperiments()))
+    }
+
+    @ReactMethod
+    fun getExperimentsWithDetails(promise: Promise) {
+        promise.resolve(Utils.prepareExperimentsForJS(sdk!!.getExperimentsWithDetails()))
     }
 
     @ReactMethod

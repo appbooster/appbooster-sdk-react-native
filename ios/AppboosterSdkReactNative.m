@@ -14,8 +14,10 @@ RCT_EXTERN_METHOD(connect:(NSDictionary *)sdkSettings
 RCT_EXTERN_METHOD(fetch:(RCTPromiseResolveBlock)resolve
                 withRejecter:(RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(getExperiments:(BOOL)addAppboosterPrefix
-                withResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXTERN_METHOD(getExperiments:(RCTPromiseResolveBlock)resolve
+                withRejecter:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(getExperimentsWithDetails:(RCTPromiseResolveBlock)resolve
                 withRejecter:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(getLastOperationDurationMillis:

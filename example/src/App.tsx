@@ -7,6 +7,7 @@ const connectToAppboosterSDK = async () => {
     appId: 'YOUR_APP_ID',
     sdkToken: 'YOUR_SDK_TOKEN',
     deviceId: 'YOUR_DEVICE_ID',
+    appsFlyerId: 'YOUR_APPSFLYER_ID',
     usingShake: false,
     defaults: {
       ['TEST_1_KEY']: 'TEST_1_DEFAULT_VALUE',
@@ -19,8 +20,11 @@ const connectToAppboosterSDK = async () => {
   const fetched = await AppboosterSdk.fetch();
   console.log('fetch experiments: ', fetched);
 
-  const experiments = await AppboosterSdk.getExperiments(true);
+  const experiments = await AppboosterSdk.getExperiments();
   console.log('experiments : ', experiments);
+
+  const experimentsWithDetails = await AppboosterSdk.getExperimentsWithDetails();
+  console.log('experimentsWithDetails : ', experimentsWithDetails);
 
   const experiment = experiments['TEST_1_KEY'];
   console.log('experiment: ', experiment);

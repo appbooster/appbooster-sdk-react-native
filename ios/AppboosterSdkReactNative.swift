@@ -15,12 +15,14 @@ class AppboosterSdkReactNative: NSObject {
         let usingShake = sdkSettings["usingShake"] as? Bool ?? false
         let defaults = sdkSettings["defaults"] as? [String: String] ?? [:]
         let showLogs = sdkSettings["showLogs"] as? Bool ?? false
+        let appsFlyerId = sdkSettings["appsFlyerId"] as? String ?? nil
 
         sdk = AppboosterSDK(
             sdkToken: sdkToken,
             appId: appId,
-            // NOTE: can SDK handles empty device?
+            // NOTE: can SDK handles empty deviceId?
             deviceId: deviceId.isEmpty ? nil : deviceId,
+            appsFlyerId: appsFlyerId,
             usingShake: usingShake,
             defaults: defaults
         )
@@ -41,17 +43,25 @@ class AppboosterSdkReactNative: NSObject {
         })
     }
 
-    @objc(getExperiments:withResolver:withRejecter:)
+    @objc(getExperiments:withRejecter:)
     func getExperiments(
-        addAppboosterPrefix: Bool,
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock) -> Void {
+        // TODO: resolve(sdk!.experiments()) works uncorrectly
         var experiments: [String: String] = [:]
-        for (key, _) in sdk!.experiments(addAppboosterPrefix: addAppboosterPrefix) {
+        for (key, _) in sdk!.experiments() {
             let experimentValue: String? = sdk[key]
             experiments.updateValue(experimentValue ?? "", forKey: key)
         }
         resolve(experiments)
+    }
+    
+    @objc(getExperimentsWithDetails:withRejecter:)
+    func getExperimentsWithDetails(
+        resolve: @escaping RCTPromiseResolveBlock,
+        reject: @escaping RCTPromiseRejectBlock) -> Void {
+        // TODO: works uncorrectly and can't iterate elements through loop
+        resolve(sdk!.experimentsWithDetails())
     }
     
     @objc(getLastOperationDurationMillis:withRejecter:)

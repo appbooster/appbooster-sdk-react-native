@@ -10,6 +10,7 @@ type SDKSettings = {
   appId: string;
   sdkToken: string;
   deviceId: string;
+  appsFlyerId: string | null;
   usingShake: boolean;
   defaults: Experiments;
   showLogs: boolean;
@@ -18,7 +19,8 @@ type SDKSettings = {
 type AppboosterSdkReactNativeType = {
   connect(sdkSettings: SDKSettings): Promise<boolean>;
   fetch(): Promise<boolean>;
-  getExperiments(addAppboosterPrefix?: boolean): Promise<Experiments>;
+  getExperiments(): Promise<Experiments>;
+  getExperimentsWithDetails(): Promise<Experiments>;
   getLastOperationDurationMillis(): Promise<number>;
   launchDebugMode(): Promise<boolean>;
 };
@@ -28,6 +30,7 @@ class AppboosterSdk {
     appId = '',
     sdkToken = '',
     deviceId = '',
+    appsFlyerId = null,
     usingShake = false,
     defaults = {},
     showLogs = false,
@@ -36,6 +39,7 @@ class AppboosterSdk {
       appId,
       sdkToken,
       deviceId,
+      appsFlyerId,
       usingShake,
       defaults,
       showLogs,
@@ -46,10 +50,12 @@ class AppboosterSdk {
     return await AppboosterSdkReactNative.fetch();
   };
 
-  getExperiments = async (
-    addAppboosterPrefix: boolean = true
-  ): Promise<Experiments> => {
-    return await AppboosterSdkReactNative.getExperiments(addAppboosterPrefix);
+  getExperiments = async (): Promise<Experiments> => {
+    return await AppboosterSdkReactNative.getExperiments();
+  };
+
+  getExperimentsWithDetails = async (): Promise<Experiments> => {
+    return await AppboosterSdkReactNative.getExperimentsWithDetails();
   };
 
   getLastOperationDurationMillis = async (): Promise<number> => {
