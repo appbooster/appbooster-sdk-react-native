@@ -3,34 +3,38 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import AppboosterSdk from 'appbooster-sdk-react-native';
 
 const connectToAppboosterSDK = async () => {
-  const connected = await AppboosterSdk.connect({
-    appId: 'YOUR_APP_ID',
-    sdkToken: 'YOUR_SDK_TOKEN',
-    deviceId: 'YOUR_DEVICE_ID',
-    appsFlyerId: 'YOUR_APPSFLYER_ID',
-    usingShake: false,
-    defaults: {
-      ['TEST_1_KEY']: 'TEST_1_DEFAULT_VALUE',
-      ['TEST_2_KEY']: 'TEST_2_DEFAULT_VALUE',
-    },
-    showLogs: false,
-  });
-  console.log('connected to AppboosterSdk: ', connected);
+  try {
+    const connected = await AppboosterSdk.connect({
+      appId: 'YOUR_APP_ID',
+      sdkToken: 'YOUR_SDK_TOKEN',
+      deviceId: 'YOUR_DEVICE_ID',
+      appsFlyerId: 'YOUR_APPSFLYER_ID',
+      usingShake: false,
+      defaults: {
+        ['TEST_1_KEY']: 'TEST_1_DEFAULT_VALUE',
+        ['TEST_2_KEY']: 'TEST_2_DEFAULT_VALUE',
+      },
+      showLogs: false,
+    });
+    console.log('connected to AppboosterSdk: ', connected);
 
-  const fetched = await AppboosterSdk.fetch();
-  console.log('fetch experiments: ', fetched);
+    const fetched = await AppboosterSdk.fetch();
+    console.log('fetch experiments: ', fetched);
 
-  const experiments = await AppboosterSdk.getExperiments();
-  console.log('experiments : ', experiments);
+    const experiments = await AppboosterSdk.getExperiments();
+    console.log('experiments : ', experiments);
 
-  const experimentsWithDetails = await AppboosterSdk.getExperimentsWithDetails();
-  console.log('experimentsWithDetails : ', experimentsWithDetails);
+    const experimentsWithDetails = await AppboosterSdk.getExperimentsWithDetails();
+    console.log('experimentsWithDetails : ', experimentsWithDetails);
 
-  const experiment = experiments['TEST_1_KEY'];
-  console.log('experiment: ', experiment);
+    const experiment = experiments.TEST_1_KEY;
+    console.log('experiment: ', experiment);
 
-  const duration = await AppboosterSdk.getLastOperationDurationMillis();
-  console.log('duration: ', duration);
+    const duration = await AppboosterSdk.getLastOperationDurationMillis();
+    console.log('duration: ', duration);
+  } catch (error) {
+    console.log('Appbooster SDK error: ', error);
+  }
 };
 
 const activateDebug = async () => {

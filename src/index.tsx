@@ -35,15 +35,20 @@ class AppboosterSdk {
     defaults = {},
     showLogs = false,
   }: SDKSettings): Promise<boolean> => {
-    return await AppboosterSdkReactNative.connect({
-      appId,
-      sdkToken,
-      deviceId,
-      appsFlyerId,
-      usingShake,
-      defaults,
-      showLogs,
-    });
+    if (appId && sdkToken) {
+      return await AppboosterSdkReactNative.connect({
+        appId: `${appId}`,
+        sdkToken: `${sdkToken}`,
+        deviceId,
+        appsFlyerId,
+        usingShake,
+        defaults,
+        showLogs,
+      });
+    }
+    throw new Error(
+      'AppboosterSdkReactNative: SDK must be initiated with an appId and sdkToken'
+    );
   };
 
   fetch = async (): Promise<boolean> => {
