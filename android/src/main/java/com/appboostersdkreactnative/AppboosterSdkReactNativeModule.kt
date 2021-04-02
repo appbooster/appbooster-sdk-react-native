@@ -22,19 +22,24 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
         val defaults = Utils.getDefaultExperiments(preparedSettings.getJSONObject("defaults"))
         val showLogs = preparedSettings.getBoolean("showLogs")
         val appsFlyerId = if (preparedSettings.has("appsFlyerId")) preparedSettings.getString("appsFlyerId") else null
+        val amplitudeUserId = if (preparedSettings.has("amplitudeUserId")) preparedSettings.getString("amplitudeUserId") else null
 
         if (currentActivity != null) {
             currentActivity!!.runOnUiThread(Runnable {
                 val sdkBuilder = AppboosterSdk.Builder(currentActivity!!.applicationContext)
-                        .appId(appId)
-                        .sdkToken(sdkToken)
-                        .deviceId(deviceId)
-                        .usingShake(usingShake)
-                        .defaults(defaults)
-                        .showLogs(showLogs)
+                  .appId(appId)
+                  .sdkToken(sdkToken)
+                  .deviceId(deviceId)
+                  .usingShake(usingShake)
+                  .defaults(defaults)
+                  .showLogs(showLogs)
 
                 appsFlyerId?.let {
-                    sdkBuilder.appsFlyerId(it)
+                  sdkBuilder.appsFlyerId(it)
+                }
+
+                amplitudeUserId?.let {
+                  sdkBuilder.amplitudeUserId(it)
                 }
 
                 sdk = sdkBuilder.build()
@@ -79,5 +84,5 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
     fun launchDebugMode(promise: Promise) {
         promise.resolve(sdk!!.launchDebugMode(currentActivity!!.applicationContext))
     }
-    
+
 }

@@ -11,6 +11,7 @@ type SDKSettings = {
   sdkToken: string;
   deviceId: string;
   appsFlyerId: string | null;
+  amplitudeUserId: string | null;
   usingShake: boolean;
   defaults: Experiments;
   showLogs: boolean;
@@ -31,6 +32,7 @@ class AppboosterSdk {
     sdkToken = '',
     deviceId = '',
     appsFlyerId = null,
+    amplitudeUserId = null,
     usingShake = false,
     defaults = {},
     showLogs = false,
@@ -41,6 +43,7 @@ class AppboosterSdk {
         sdkToken: `${sdkToken}`,
         deviceId,
         appsFlyerId,
+        amplitudeUserId,
         usingShake,
         defaults,
         showLogs,

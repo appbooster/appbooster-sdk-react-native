@@ -16,6 +16,7 @@ class AppboosterSdkReactNative: NSObject {
         let defaults = sdkSettings["defaults"] as? [String: String] ?? [:]
         let showLogs = sdkSettings["showLogs"] as? Bool ?? false
         let appsFlyerId = sdkSettings["appsFlyerId"] as? String ?? nil
+        let amplitudeUserId = sdkSettings["amplitudeUserId"] as? String ?? nil
 
         sdk = AppboosterSDK(
             sdkToken: sdkToken,
@@ -23,6 +24,7 @@ class AppboosterSdkReactNative: NSObject {
             // NOTE: can SDK handles empty deviceId?
             deviceId: deviceId.isEmpty ? nil : deviceId,
             appsFlyerId: appsFlyerId,
+            amplitudeUserId: amplitudeUserId,
             usingShake: usingShake,
             defaults: defaults
         )
@@ -47,13 +49,7 @@ class AppboosterSdkReactNative: NSObject {
     func getExperiments(
         resolve: @escaping RCTPromiseResolveBlock,
         reject: @escaping RCTPromiseRejectBlock) -> Void {
-        // TODO: resolve(sdk!.experiments()) works uncorrectly
-        var experiments: [String: String] = [:]
-        for (key, _) in sdk!.experiments() {
-            let experimentValue: String? = sdk[key]
-            experiments.updateValue(experimentValue ?? "", forKey: key)
-        }
-        resolve(experiments)
+        resolve(sdk!.experiments())
     }
     
     @objc(getExperimentsWithDetails:withRejecter:)
