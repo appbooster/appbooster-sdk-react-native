@@ -1,6 +1,6 @@
 {
   "name": "appbooster-sdk-react-native",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Mobile AB-testing SDK",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
