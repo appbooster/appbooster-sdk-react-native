@@ -17,12 +17,14 @@ class AppboosterSdkReactNative: NSObject {
         let showLogs = sdkSettings["showLogs"] as? Bool ?? false
         let appsFlyerId = sdkSettings["appsFlyerId"] as? String ?? nil
         let amplitudeUserId = sdkSettings["amplitudeUserId"] as? String ?? nil
+        let deviceProperties = sdkSettings["deviceProperties"] as? [String: Any] ?? [:]
 
         sdk = AppboosterSDK(
             sdkToken: sdkToken,
             appId: appId,
             // NOTE: can SDK handles empty deviceId?
             deviceId: deviceId.isEmpty ? nil : deviceId,
+            deviceProperties: deviceProperties,
             appsFlyerId: appsFlyerId,
             amplitudeUserId: amplitudeUserId,
             usingShake: usingShake,

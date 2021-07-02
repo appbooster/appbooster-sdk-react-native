@@ -1,6 +1,6 @@
 {
   "name": "appbooster-sdk-react-native",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Mobile AB-testing SDK",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -34,6 +34,7 @@
     "clear": "yarn clear-root && yarn clear-example",
     "reset": "yarn clear-root && yarn clear-example && yarn bootstrap && yarn clear-android-cache",
     "clear-pods": "cd example && cd ios && pod cache clean --all && cd .. && cd ..",
+    "update-sdk-pod": "cd example && cd ios && pod update AppboosterSDK & cd .. && cd ..",
     "update-pods": "cd example && cd ios && pod install --repo-update && cd .. && cd .."
   },
   "keywords": [

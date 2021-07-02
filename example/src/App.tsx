@@ -9,6 +9,9 @@ const connectToAppboosterSDK = async () => {
     deviceId: 'YOUR_DEVICE_ID',
     appsFlyerId: 'YOUR_APPSFLYER_ID',
     amplitudeUserId: 'YOUR_AMPLITUDE_ID',
+    deviceProperties: {
+      installedAt: '2021-05-20T09:55:05.000+03:00',
+    },
     usingShake: false,
     defaults: {
       ['TEST_1_KEY']: 'TEST_1_DEFAULT_VALUE',

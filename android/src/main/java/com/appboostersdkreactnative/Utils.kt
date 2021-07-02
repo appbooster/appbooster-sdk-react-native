@@ -19,6 +19,11 @@ internal object Utils {
         return fromJSONObjectToMap(defaults)
     }
 
+    @Throws(JSONException::class)
+    fun getDeviceProperties(deviceProperties: JSONObject): Map<String, String> {
+        return fromJSONObjectToMap(deviceProperties)
+    }
+
     fun prepareExperimentsForJS(experiments: Map<String, String>): WritableMap {
         val preparedExperiments = Arguments.createMap()
 

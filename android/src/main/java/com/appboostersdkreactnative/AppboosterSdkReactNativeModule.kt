@@ -23,6 +23,7 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
         val showLogs = preparedSettings.getBoolean("showLogs")
         val appsFlyerId = if (preparedSettings.has("appsFlyerId")) preparedSettings.getString("appsFlyerId") else null
         val amplitudeUserId = if (preparedSettings.has("amplitudeUserId")) preparedSettings.getString("amplitudeUserId") else null
+        val deviceProperties = Utils.getDeviceProperties(preparedSettings.getJSONObject("deviceProperties"))
 
         if (currentActivity != null) {
             currentActivity!!.runOnUiThread(Runnable {
@@ -33,6 +34,7 @@ class AppboosterSdkReactNativeModule(reactContext: ReactApplicationContext) : Re
                   .usingShake(usingShake)
                   .defaults(defaults)
                   .showLogs(showLogs)
+                  .deviceProperties(deviceProperties)
 
                 appsFlyerId?.let {
                   sdkBuilder.appsFlyerId(it)
