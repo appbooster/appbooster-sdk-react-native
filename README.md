@@ -104,7 +104,7 @@ const connected = await AppboosterSdk.connect({
   amplitudeUserId: 'YOUR_AMPLITUDE_ID', // optional, null by default, use id that you set with `amplitudeInstance.setUserId` method if Amplitude integration is needed
   deviceProperties: {
     installedAt: '2021-05-20T09:55:05.000+03:00',
-  }, // optional, empty object by default, additional information about device. You can use next JS data types: Boolean, Number, String, Object, Array, null for iOS and String for Android
+  }, // optional, empty object by default, additional information about device. You can use next data types: String, Number, Boolean, Date.
   usingShake: false, // false by default, cause React Native already uses shake motion in debug mode for own purposes (show React Native debug window after shaking your device)
   defaults: {
     ['TEST_1_KEY']: 'TEST_1_DEFAULT_VALUE',

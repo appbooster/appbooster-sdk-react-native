@@ -6,24 +6,18 @@ type Experiments = {
   [key: string]: string;
 };
 
-type DefaultTypes = string | number | boolean | null;
-
-type DefaultArrayType = (
-  | DefaultTypes
-  | DevicePropertiesIOS
-  | DefaultArrayType
-)[];
-
-type DevicePropertiesIOS = {
-  [key: string]: DefaultTypes | DevicePropertiesIOS | DefaultArrayType;
-};
-
-type DevicePropertiesAndroid = {
-  [key: string]: string;
-};
-
 type UserDeviceProperties = {
-  [key: string]: any;
+  [key: string]: string | number | boolean | Date;
+};
+
+type SdkTypes = string | number | boolean;
+
+type SdkDeviceProperties = {
+  [key: string]: SdkTypes;
+};
+
+type SdkDevicePropertiesAndroid = {
+  [key: string]: string;
 };
 
 type SDKSettings = {
@@ -53,103 +47,52 @@ const getType = (value: any = undefined): string => {
   return type.toLowerCase();
 };
 
-const prepareObjectForNativeAndroid = (
-  deviceProperties: UserDeviceProperties
-): DevicePropertiesAndroid => {
-  return Object.entries(deviceProperties).reduce<DevicePropertiesAndroid>(
-    (result, [key, value]) => {
-      switch (getType(value)) {
-        case 'string':
-        case 'number':
-        case 'boolean':
-        case 'null':
-          result[key] = `${value?.valueOf?.() ?? value}`;
-          return result;
-        case 'array':
-        case 'object':
-          result[key] = JSON.stringify(value);
-          return result;
-        case 'undefined':
-          result[key] = 'null';
-          return result;
-        default:
-          return result;
-      }
-    },
-    {}
-  );
-};
-
-const prepareObjectForNativeIOS = (
-  deviceProperties: UserDeviceProperties
-): DevicePropertiesIOS => {
-  return Object.entries(deviceProperties).reduce<DevicePropertiesIOS>(
-    (result, [key, value]) => {
-      switch (getType(value)) {
-        case 'string':
-        case 'boolean':
-        case 'null':
-          const otherTypeValue = (value?.valueOf?.() ?? value) as DefaultTypes;
-          result[key] = otherTypeValue;
-          return result;
-        case 'number':
-          const number = (value?.valueOf?.() ?? value) as number;
-          result[key] = prepareNumberForNativeIOS(number);
-          return result;
-        case 'array':
-          const arrayValue = value as any[];
-          result[key] = prepareArrayForNativeIOS(arrayValue);
-          return result;
-        case 'object':
-          const objectValue = value as UserDeviceProperties;
-          result[key] = prepareObjectForNativeIOS(objectValue);
-          return result;
-        case 'undefined':
-          result[key] = null;
-          return result;
-        default:
-          return result;
-      }
-    },
-    {}
-  );
-};
-
-const prepareArrayForNativeIOS = (arr: any[]): DefaultArrayType => {
-  return arr.reduce<DefaultArrayType>((result, value) => {
-    switch (getType(value)) {
-      case 'string':
-      case 'boolean':
-      case 'null':
-        const otherTypeValue = (value?.valueOf?.() ?? value) as DefaultTypes;
-        result.push(otherTypeValue);
-        return result;
-      case 'number':
-        const number = (value?.valueOf?.() ?? value) as number;
-        result.push(prepareNumberForNativeIOS(number));
-        return result;
-      case 'array':
-        const arrayValue = value as any[];
-        result.push(prepareArrayForNativeIOS(arrayValue));
-        return result;
-      case 'object':
-        const objectValue = value as UserDeviceProperties;
-        result.push(prepareObjectForNativeIOS(objectValue));
-        return result;
-      case 'undefined':
-        result.push(null);
-        return result;
-      default:
-        return result;
-    }
-  }, []);
-};
-
-const prepareNumberForNativeIOS = (number: number): number | string => {
+const getNumberForDeviceProperties = (number: number): number | string => {
   if (!Number.isFinite(number) || Number.isNaN(number)) {
     return `${number}`;
   }
   return number;
+};
+
+const stringifyDeviceProperties = (
+  deviceProperties: SdkDeviceProperties
+): SdkDevicePropertiesAndroid => {
+  return Object.entries(deviceProperties).reduce<SdkDevicePropertiesAndroid>(
+    (result, [key, value]) => {
+      result[key] = `${value}`;
+      return result;
+    },
+    {}
+  );
+};
+
+const getSdkDeviceProperties = (
+  deviceProperties: UserDeviceProperties
+): SdkDeviceProperties => {
+  return Object.entries(deviceProperties).reduce<SdkDeviceProperties>(
+    (result, [key, value]) => {
+      switch (getType(value)) {
+        case 'string':
+        case 'boolean':
+          const otherTypeValue = (value?.valueOf?.() ?? value) as SdkTypes;
+          result[key] = otherTypeValue;
+          return result;
+        case 'number':
+          const number = (value?.valueOf?.() ?? value) as number;
+          result[key] = getNumberForDeviceProperties(number);
+          return result;
+        case 'date':
+          const date = (value as Date).toISOString();
+          result[key] = date;
+          return result;
+        default:
+          throw new Error(
+            'AppboosterSdkReactNative: you can use only next data types for deviceProperties: String, Number, Boolean, Date'
+          );
+      }
+    },
+    {}
+  );
 };
 
 class AppboosterSdk {
@@ -165,6 +108,7 @@ class AppboosterSdk {
     showLogs = false,
   }: SDKSettings): Promise<boolean> => {
     if (appId && sdkToken) {
+      const sdkDeviceProperties = getSdkDeviceProperties(deviceProperties);
       return await AppboosterSdkReactNative.connect({
         appId: `${appId}`,
         sdkToken: `${sdkToken}`,
@@ -173,8 +117,8 @@ class AppboosterSdk {
         amplitudeUserId,
         deviceProperties:
           Platform.OS === 'android'
-            ? prepareObjectForNativeAndroid(deviceProperties)
-            : prepareObjectForNativeIOS(deviceProperties),
+            ? stringifyDeviceProperties(sdkDeviceProperties)
+            : sdkDeviceProperties,
         usingShake,
         defaults,
         showLogs,
