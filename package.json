@@ -34,6 +34,7 @@
     "clear": "yarn clear-root && yarn clear-example",
     "reset": "yarn clear-root && yarn clear-example && yarn bootstrap && yarn clear-android-cache",
     "clear-pods": "cd example && cd ios && pod cache clean --all && cd .. && cd ..",
+    "reset-all": "yarn clear-pods && yarn reset",
     "update-sdk-pod": "cd example && cd ios && pod update AppboosterSDK & cd .. && cd ..",
     "update-pods": "cd example && cd ios && pod install --repo-update && cd .. && cd .."
   },
