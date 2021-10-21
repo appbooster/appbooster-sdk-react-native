@@ -28,7 +28,8 @@ const connectToAppboosterSDK = async () => {
     const experiments = await AppboosterSdk.getExperiments();
     console.log('experiments : ', experiments);
 
-    const experimentsWithDetails = await AppboosterSdk.getExperimentsWithDetails();
+    const experimentsWithDetails =
+      await AppboosterSdk.getExperimentsWithDetails();
     console.log('experimentsWithDetails : ', experimentsWithDetails);
 
     const experiment = experiments['TEST_1_KEY'];
